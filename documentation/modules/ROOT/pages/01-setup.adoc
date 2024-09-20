@@ -1,33 +1,26 @@
-= Microlab SetUp
+= Debugging Execution Environments 
+== Microlab Info
 
-Conectarse a través de navegador web a los siguientes sistemas:
+En este laboratorio veremos la importancia de los Execution Enviroments para la escalabilidad y estandarización de nuestra plataforma de Automatización. 
 
-.Sistemas de Administración
-[cols="1,2,2",options="header"]
-|===
-|Sistema |Elemento |Información
+Para realizar el laboratorio necesitarás conectarte a través de navegador web a la consola de Ansible Automation Platform con los siguientes datos:
 
-|Ansible Automation Controller
-|URL
-|https://aap24-controller01.sc24.workshops/#/login
+[#controller]
+[TIP]
+====
+Login link:https://aap24-controller01.sc24.workshops/#/login[Ansible Automation Controller]
+*user*: user02
+*pass*: R3dh4t1!
+====
 
-|Ansible Automation Controller
-|Usuario
-|admin
+También haremos uso de ansible-navigator desde la consola del servidor:
 
-|Ansible Automation Controller
-|Contraseña
-|R3dh4t1!
-
-|GitLab
-|URL
-|https://gitlab.sc24.workshops:8888/root/sc24_casc
-
-|GitLab
-|Usuario
-|sc24_casc
-
-|GitLab
-|Contraseña
-|R3dh4t1!
-|===
+[#ssh]
+[TIP]
+====
+[source,bash]
+----
+ssh root@aap24-controller01.sc24.workshops
+----
+*pass*: R3dh4t1!
+====

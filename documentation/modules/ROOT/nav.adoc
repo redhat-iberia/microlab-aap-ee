@@ -1,6 +1,5 @@
-* xref:01-setup.adoc[1. Setup]
-** xref:01-setup.adoc#prerequisite[Prerequisites]
+* xref:01-setup.adoc[1. Microlab Info]
+** xref:01-setup.adoc#controller[Controller Access]
+** xref:01-setup.adoc#ssh[SSH Access]
 
-* xref:02-deploy.adoc[2. Deploy Service]
-** xref:02-deploy.adoc#package[Build Service]
-** xref:02-deploy.adoc#deploy[Deploy Dervice]
+* xref:02-deploy.adoc[2. Microlab Guide]

@@ -1,6 +1,4 @@
 = Ejecución microlab
-:source-highlighter: pygments
-:source-language: shell
 
 [#ejecucion]
 === Ejecución del template para la creación de objetos en AAP
@@ -16,52 +14,19 @@ Ejecutamos el Job Template y rellenamos los campos que nos pide el formulario.
 
 image::survey.png[width=600, height=400]
 
-La definición del JT una vez descomentado el nuevo y comentado el viejo, debería quedar así:
-
-```yaml
----
-controller_templates:
-  #- name: "{{ orgs }} Old_JT_summit24"
-  #  description: "Playbook to test CD of CasC"
-  #  organization: "{{ orgs }}"
-  #  project: "{{ orgs }} CasC_Data"
-  #  inventory: "{{ orgs }} Localhost"
-  #  playbook: "debug_old.yml"
-  #  job_type: run
-  #  credentials:
-  #    - "{{ orgs }} Vault Credential"
-  - name: "{{ orgs }} New_JT_CasC_summit24"
-    description: "Playbook to test CD of CasC"
-    organization: "{{ orgs }}"
-    project: "{{ orgs }} CasC_Data"
-    inventory: "{{ orgs }} Localhost"
-    playbook: "debug_new.yml"
-    job_type: run
-    credentials:
-      - "{{ orgs }} Vault Credential"
-...
-```
-
 Una vez la ejecución del Job Template haya fallado (esa era la intención) vamos a ver cual es el error a través de la interfaz Web.
-
-image::job_error.png[width=900, height=500]
 
 En los logs podremos ver que el problema viene por la falta de una colección que no existe dentro del execution environment.
 
 image::error_log.png[width=900, height=500]
 
 
-[source,bash,subs="+macros,+attributes"]
-----
-
-----
-
 Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse.
 
 [IMPORTANT]
-----
+====
 Para este microlab hemos descargado las imágenes de los Execution Environment en el registro interno de la máquina, simplificando el escenario para no hacerlo demasiado extenso. En un escenario productivo haríamos uso de Ansible Automation Hub para el almacenamiento y publicación de éstas imágenes.
-----
+====
 
 [#collection]
 === Buscando la coleccion en las imágenes
