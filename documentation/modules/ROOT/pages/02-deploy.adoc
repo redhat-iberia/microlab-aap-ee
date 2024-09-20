@@ -8,17 +8,17 @@ Lo primero que debemos hacer es ejecutar el Job Template *[OPS] Añadir usuario 
 En la link:https://aap24-controller01.sc24.workshops//#/templates[interfaz web del Controller], verás un Job Template
 nombrado *[OPS] Añadir usuario a Operaciones*.
 
-image::launch_job.png[width=600, height=400]
+image::job_launch.png
 
 Ejecutamos el Job Template y rellenamos los campos que nos pide el formulario. 
 
-image::survey.png[width=600, height=400]
+image::survey.png
 
 Una vez la ejecución del Job Template haya fallado (esa era la intención) vamos a ver cual es el error a través de la interfaz Web.
 
 En los logs podremos ver que el problema viene por la falta de una colección que no existe dentro del execution environment.
 
-image::error_log.png[width=900, height=500]
+image::error_log.png
 
 
 Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse.
@@ -33,7 +33,7 @@ Para este microlab hemos descargado las imágenes de los Execution Environment e
 
 En la link:https://aap24-controller01.sc24.workshops/#/execution_environments[interfaz web del Controller, sección de __Execution Environmets__], verás cuales tenemos disponibles:
 
-image::exec_envs.png[width=900, height=500]
+image::exec_envs.png
 
 Con esta información no vamos a poder saber cual de ellas tiene la colección que necesitamos, pero disponemos de una herramienta de exploración a través del terminal.
 
@@ -160,11 +160,11 @@ Image: ee-supported-rhel8:latest (primary) (Information about ansible and ansibl
 
 Ahora que sabemos cual es la imagen que debemos usar volvemos a la link:https://aap24-controller01.sc24.workshops/#/jobs[interfaz web del Controller, sección de Job Templates], editamos el *[OPS] Añadir usuario a Operaciones* y seleccionamos el EE necesario.
 
-image::modify_ee.png[width=900, height=500]
+image::modify_ee.png
 
 Volvemos a lanzar el Job Template y comprobamos que se ejecuta de manera correcta
 
-image::job_success.png[width=900, height=500]
+image::job_run.png
 
 Ahora podemos comprobar que el usuario que hemos creado tiene los permisos correctos para poder realizar su trabajo.
 
