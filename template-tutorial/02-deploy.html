@@ -97,18 +97,14 @@
 <p>En la <a href="https://aap24-controller01.sc24.workshops//#/templates">interfaz web del Controller</a>, verás un Job Template
 nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
-<div class="imageblock unresolved">
-<div class="content">
-<img src="launch_job.png" alt="launch job" width="600" height="400">
-</div>
+<div class="paragraph">
+<p>image::job_launch.png</p>
 </div>
 <div class="paragraph">
 <p>Ejecutamos el Job Template y rellenamos los campos que nos pide el formulario.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/survey.png" alt="survey" width="600" height="400">
-</div>
+<div class="paragraph">
+<p>image::survey.png</p>
 </div>
 <div class="paragraph">
 <p>Una vez la ejecución del Job Template haya fallado (esa era la intención) vamos a ver cual es el error a través de la interfaz Web.</p>
@@ -116,10 +112,8 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 <div class="paragraph">
 <p>En los logs podremos ver que el problema viene por la falta de una colección que no existe dentro del execution environment.</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/error_log.png" alt="error log" width="900" height="500">
-</div>
+<div class="paragraph">
+<p>image::error_log.png</p>
 </div>
 <div class="paragraph">
 <p>Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse.</p>
@@ -144,10 +138,8 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 <div class="paragraph">
 <p>En la <a href="https://aap24-controller01.sc24.workshops/#/execution_environments">interfaz web del Controller, sección de <em>Execution Environmets</em></a>, verás cuales tenemos disponibles:</p>
 </div>
-<div class="imageblock">
-<div class="content">
-<img src="_images/exec_envs.png" alt="exec envs" width="900" height="500">
-</div>
+<div class="paragraph">
+<p>image::exec_envs.png</p>
 </div>
 <div class="paragraph">
 <p>Con esta información no vamos a poder saber cual de ellas tiene la colección que necesitamos, pero disponemos de una herramienta de exploración a través del terminal.</p>
@@ -282,18 +274,14 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 <div class="paragraph">
 <p>Ahora que sabemos cual es la imagen que debemos usar volvemos a la <a href="https://aap24-controller01.sc24.workshops/#/jobs">interfaz web del Controller, sección de Job Templates</a>, editamos el <strong>[OPS] Añadir usuario a Operaciones</strong> y seleccionamos el EE necesario.</p>
 </div>
-<div class="imageblock unresolved">
-<div class="content">
-<img src="modify_ee.png" alt="modify ee" width="900" height="500">
-</div>
+<div class="paragraph">
+<p>image::modify_ee.png</p>
 </div>
 <div class="paragraph">
 <p>Volvemos a lanzar el Job Template y comprobamos que se ejecuta de manera correcta</p>
 </div>
-<div class="imageblock unresolved">
-<div class="content">
-<img src="job_success.png" alt="job success" width="900" height="500">
-</div>
+<div class="paragraph">
+<p>image::job_run.png</p>
 </div>
 <div class="paragraph">
 <p>Ahora podemos comprobar que el usuario que hemos creado tiene los permisos correctos para poder realizar su trabajo.</p>
