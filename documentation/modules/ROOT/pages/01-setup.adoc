@@ -1,29 +1,33 @@
-= Setup
-include::_attributes.adoc[]
+= Microlab SetUp
 
-[#prerequisite]
-== Prerequisite CLI tools
+Conectarse a través de navegador web a los siguientes sistemas:
 
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/prerequisites-kubernetes.adoc[]
+.Sistemas de Administración
+[cols="1,2,2",options="header"]
 |===
+|Sistema |Elemento |Información
 
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/optional-requisites.adoc[]
+|Ansible Automation Controller
+|URL
+|https://aap24-controller01.sc24.workshops/#/login
+
+|Ansible Automation Controller
+|Usuario
+|admin
+
+|Ansible Automation Controller
+|Contraseña
+|R3dh4t1!
+
+|GitLab
+|URL
+|https://gitlab.sc24.workshops:8888/root/sc24_casc
+
+|GitLab
+|Usuario
+|sc24_casc
+
+|GitLab
+|Contraseña
+|R3dh4t1!
 |===
-
-[#minikube]
-== Setup Kubernetes
-
-:profile: my_profile
-
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/kubernetes-setup.adoc[]
-
-And then you are ready for start using Kubernetes:
-
-image::kubelogo.png[]
-
-[#downloadtutorial]
-== Get tutorial sources
-
-:tutorial-url: https://github.com/redhat-developer-demos/rhd-tutorial-common.git
-:folder: my_folder
-include::https://raw.githubusercontent.com/redhat-developer-demos/rhd-tutorial-common/master/download-sources.adoc[]

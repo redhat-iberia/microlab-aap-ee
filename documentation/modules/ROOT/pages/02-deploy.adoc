@@ -1,43 +1,216 @@
-= Deploy Service
-include::_attributes.adoc[]
+= Ejecución microlab
+:source-highlighter: pygments
+:source-language: shell
 
-[#service]
-== The Service
+[#ejecucion]
+=== Ejecución del template para la creación de objetos en AAP
 
-The code:
+Lo primero que debemos hacer es ejecutar el Job Template *[OPS] Añadir usuario a Operaciones* para crear un nuevo usuario en la organización y darle permisos para ver los elementos que contiene.
 
-[.lines_7]
-[.console-input]
-[source, java,subs="+macros,+attributes"]
-----
-public class Main {
+En la link:https://aap24-controller01.sc24.workshops//#/templates[interfaz web del Controller], verás un Job Template
+nombrado *[OPS] Añadir usuario a Operaciones*.
 
-    public static void main(String[] args) {
+image::launch_job.png[width=600, height=400]
 
-    } 
+Ejecutamos el Job Template y rellenamos los campos que nos pide el formulario. 
 
-}
+image::survey.png[width=600, height=400]
 
-./mvnw compile
-----
+La definición del JT una vez descomentado el nuevo y comentado el viejo, debería quedar así:
 
-[#package]
-== Packaging the Service
+```yaml
+---
+controller_templates:
+  #- name: "{{ orgs }} Old_JT_summit24"
+  #  description: "Playbook to test CD of CasC"
+  #  organization: "{{ orgs }}"
+  #  project: "{{ orgs }} CasC_Data"
+  #  inventory: "{{ orgs }} Localhost"
+  #  playbook: "debug_old.yml"
+  #  job_type: run
+  #  credentials:
+  #    - "{{ orgs }} Vault Credential"
+  - name: "{{ orgs }} New_JT_CasC_summit24"
+    description: "Playbook to test CD of CasC"
+    organization: "{{ orgs }}"
+    project: "{{ orgs }} CasC_Data"
+    inventory: "{{ orgs }} Localhost"
+    playbook: "debug_new.yml"
+    job_type: run
+    credentials:
+      - "{{ orgs }} Vault Credential"
+...
+```
 
-You can package the next bash script:
+Una vez la ejecución del Job Template haya fallado (esa era la intención) vamos a ver cual es el error a través de la interfaz Web.
+
+image::job_error.png[width=900, height=500]
+
+En los logs podremos ver que el problema viene por la falta de una colección que no existe dentro del execution environment.
+
+image::error_log.png[width=900, height=500]
+
 
 [source,bash,subs="+macros,+attributes"]
 ----
-include::example$run.sh[]
+
 ----
 
-[#deploy]
-== Deploy the Service
+Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse.
 
-And then you can deploy the service and execute commands inside:
+[IMPORTANT]
+----
+Para este microlab hemos descargado las imágenes de los Execution Environment en el registro interno de la máquina, simplificando el escenario para no hacerlo demasiado extenso. En un escenario productivo haríamos uso de Ansible Automation Hub para el almacenamiento y publicación de éstas imágenes.
+----
 
-:podname: apps
+[#collection]
+=== Buscando la coleccion en las imágenes
 
-include::partial$exec_pod.adoc[]
+En la link:https://aap24-controller01.sc24.workshops/#/execution_environments[interfaz web del Controller, sección de __Execution Environmets__], verás cuales tenemos disponibles:
 
-:!podname:
+image::exec_envs.png[width=900, height=500]
+
+Con esta información no vamos a poder saber cual de ellas tiene la colección que necesitamos, pero disponemos de una herramienta de exploración a través del terminal.
+
+Nos conectamos a la máquina a través de ssh. 
+
+[source,bash,subs="+macros,+attributes"]
+----
+$ ssh root@aap24-controller01.sc24.workshops
+----
+
+Ahora vamos a usar el comando _ansible-navigator_ 
+
+[source,bash,subs="+macros,+attributes"]
+----
+$ ansible-navigator
+
+ 0│Welcome
+ 1│————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————————
+ 2│
+ 3│Some things you can try from here:
+ 4│- :collections                                    Explore available collections
+ 5│- :config                                         Explore the current ansible configuration
+ 6│- :doc <plugin>                                   Review documentation for a module or plugin
+ 7│- :help                                           Show the main help page
+ 8│- :images                                         Explore execution environment images
+ 9│- :inventory -i <inventory>                       Explore an inventory
+10│- :log                                            Review the application log
+11│- :lint <file or directory>                       Lint Ansible/YAML files (experimental)
+12│- :open                                           Open current page in the editor
+13│- :replay                                         Explore a previous run using a playbook artifact
+14│- :run <playbook> -i <inventory>                  Run a playbook in interactive mode
+15│- :settings                                       Review the current ansible-navigator settings
+16│- :quit                                           Quit the application
+17│
+18│happy automating,
+19│
+20│-winston
+----
+
+Seleccionamos la opción _images_, escribiendo _:images_ en el terminal, y se nos mostrarán las imagenes que tenemos en el registry interno.
+
+[source,bash,subs="+macros,+attributes"]
+----
+Image                                                Tag             Execution environment                            Created                   Size
+0│ee-supported-rhel8                                   latest          True                                             2 weeks ago               1.53 GB
+1│ee-supported-rhel8-casc                              latest          True                                             11 days ago               1.62 GB
+2│gitlab-ee                                            latest          False                                            4 weeks ago               3.45 GB
+----
+
+Elegimos la imagen que queramos inspeccionar pulsando el numero del index y seleccionamos la opción 2 en la siguiente pantalla
+
+[source,bash,subs="+macros,+attributes"]
+----
+Image: ee-supported-rhel8:latest (primary)                                 Description
+0│Image information                                                          Information collected from image inspection
+1│General information                                                        OS and python version information
+2│Ansible version and collections                                            Information about ansible and ansible collections
+3│Python packages                                                            Information about python and python packages
+4│Operating system packages                                                  Information about operating system packages
+5│Everything                                                                 All image information
+----
+
+Una vez seleccionada la imagen nos mostrará todas las colecciones instaladas en el Execution Environment
+
+----
+Image: ee-supported-rhel8:latest (primary) (Information about ansible and ansible collections)                                                                       
+ 0│---
+ 1│ansible:
+ 2│  collections:
+ 3│    details:
+ 4│	 amazon.aws: 6.4.0
+ 5│	 ansible.controller: 4.5.10
+ 6│	 ansible.netcommon: 6.0.0
+ 7│	 ansible.network: 3.0.0
+ 8│	 ansible.posix: 1.5.4
+ 9│	 ansible.scm: 2.0.0
+10│	 ansible.security: 2.0.0
+11│	 ansible.snmp: 2.0.0
+12│	 ansible.utils: 3.0.0
+13│	 ansible.windows: 1.14.0
+14│	 ansible.yang: 2.0.0
+15│	 arista.eos: 7.0.0
+16│	 cisco.asa: 5.0.0
+17│	 cisco.ios: 6.1.0
+18│	 cisco.iosxr: 7.0.0
+19│	 cisco.nxos: 6.0.0
+20│	 cloud.common: 2.1.2
+21│	 cloud.terraform: 1.1.1
+22│	 frr.frr: 2.0.2
+23│	 ibm.qradar: 3.0.0
+24│	 junipernetworks.junos: 6.0.0
+25│	 kubernetes.core: 3.0.1
+26│	 microsoft.ad: 1.1.0
+27│	 openvswitch.openvswitch: 2.1.1
+28│	 redhat.amq_broker: 1.3.0
+29│	 redhat.data_grid: 1.3.1
+30│	 redhat.eap: 1.3.1
+31│	 redhat.insights: 1.2.2
+32│	 redhat.jws: 2.0.0
+33│	 redhat.openshift: 2.3.0
+34│	 redhat.openshift_virtualization: 1.2.3
+35│	 redhat.redhat_csp_download: 1.2.2
+36│	 redhat.rhbk: 2.2.2
+37│	 redhat.rhel_idm: 1.10.0
+38│	 redhat.rhel_system_roles: 1.21.1
+39│	 redhat.rhv: 2.4.2
+40│	 redhat.runtimes_common: 1.1.3
+41│	 redhat.sap_install: 1.2.1
+42│	 redhat.satellite: 3.10.0
+43│	 redhat.satellite_operations: 1.3.0
+44│	 redhat.sso: 1.3.0
+45│	 sap.sap_operations: 1.0.4
+46│	 servicenow.itsm: 2.1.0
+47│	 splunk.es: 3.0.0
+48│	 trendmicro.deepsec: 3.0.0
+49│	 vmware.vmware_rest: 2.3.1
+50│	 vyos.vyos: 4.0.2
+51│  version:
+52│    details: ansible [core 2.15.12]
+----
+
+[#update-template]
+=== Modificando el EE del Job Template
+
+Ahora que sabemos cual es la imagen que debemos usar volvemos a la link:https://aap24-controller01.sc24.workshops/#/jobs[interfaz web del Controller, sección de Job Templates], editamos el *[OPS] Añadir usuario a Operaciones* y seleccionamos el EE necesario.
+
+image::modify_ee.png[width=900, height=500]
+
+Volvemos a lanzar el Job Template y comprobamos que se ejecuta de manera correcta
+
+image::job_success.png[width=900, height=500]
+
+Ahora podemos comprobar que el usuario que hemos creado tiene los permisos correctos para poder realizar su trabajo.
+
+Hacemos login con el usuario y ejecutamos uno de los Job Templates que tenemos disponibles.
+
+*[OPS] Reiniciar servicio*
+*[OPS] Reiniciar servidor*
+
+[#resumen]
+=== Resumen
+
+Durante este microlab hemos querido hacer foco en la importancia de la abtracción a la hora de crear código delegando las dependencias de paquetes y módulos en la creación del Execution Environment, lo que nos proporciona una portabilidad absoluta a la hora de ejecutar nuestro código, y en una de las herramientas de desarrollo incluídas en Ansible Automation Platform como es _ansible-navigator_.
+
+Obviamente ésta no es la única (hay más de 20 projectos de comunidad), pero si quieres ampliar la información sobre las demás herramientas incluídas puedes pasar por nuestro stand y preguntar a uno de nuestros expertos.
