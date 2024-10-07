@@ -103,7 +103,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Ejecutamos el Job Template y rellenamos los campos que nos pide el formulario.</p>
+<p>Ejecutamos el Job Template y rellenamos los campos que nos pide el formulario con los datos que queramos, por ejemplo:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -120,6 +120,20 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 <div class="content">
 <img src="_images/error_log.png" alt="error log">
 </div>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>En caso de que no se vea el log refrescar la página.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p>Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse.</p>
@@ -142,7 +156,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 <div class="sect2">
 <h3 id="collection"><a class="anchor" href="#collection"></a>Buscando la coleccion en las imágenes</h3>
 <div class="paragraph">
-<p>En la <a href="https://aap24-controller01.sc24.workshops/#/execution_environments">interfaz web del Controller, sección de <em>Execution Environmets</em></a>, verás cuales tenemos disponibles:</p>
+<p>En la <a href="https://aap24-controller01.sc24.workshops/#/execution_environments">interfaz web del Controller, sección de <em>Execution Environments</em></a>, verás cuales tenemos disponibles:</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -157,7 +171,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ ssh root@aap24-controller01.sc24.workshops</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ ssh awx@aap24-controller01.sc24.workshops</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -191,7 +205,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Seleccionamos la opción <strong><em>images</em></strong>, escribiendo <strong><em>:images</em></strong> en el terminal, y se nos mostrarán las imagenes que tenemos en el registry interno.</p>
+<p>Seleccionamos la opción <em>images</em>, escribiendo <strong><em>:images</em></strong> en el terminal, y se nos mostrarán las imagenes que tenemos en el registry interno.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -202,7 +216,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Elegimos la imagen que queramos inspeccionar, en este caso la <em>ee-supported-rhel8</em>, pulsando el número <strong><em>0</em></strong>.  En la siguiente pantalla, seleccionamos la opción <strong><em>2</em></strong> para que nos muestre las collecciones instaladas en el Execution Environment.</p>
+<p>Elegimos la imagen que queramos inspeccionar, en este caso la <em>ee-supported-rhel8</em>, pulsando el número <strong>"<em>0</em>"</strong>.  En la siguiente pantalla, seleccionamos la opción <strong>"<em>2</em>"</strong> para que nos muestre las collecciones instaladas en el Execution Environment.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -280,7 +294,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 <div class="sect2">
 <h3 id="update-template"><a class="anchor" href="#update-template"></a>Modificando el EE del Job Template</h3>
 <div class="paragraph">
-<p>Ahora que sabemos cual es la imagen que debemos usar volvemos a la <a href="https://aap24-controller01.sc24.workshops/#/jobs">interfaz web del Controller, sección de Job Templates</a>, editamos el <strong>[OPS] Añadir usuario a Operaciones</strong> y seleccionamos el EE necesario.</p>
+<p>Ahora que sabemos cual es la imagen que debemos usar volvemos a la <a href="https://aap24-controller01.sc24.workshops/#/jobs">interfaz web del Controller, sección de Job Templates</a>, editamos el template <strong>[OPS] Añadir usuario a Operaciones</strong> y seleccionamos el EE necesario, en este caso el <strong><em>"Default Execution Environment"</em></strong>.</p>
 </div>
 <div class="imageblock">
 <div class="content">
