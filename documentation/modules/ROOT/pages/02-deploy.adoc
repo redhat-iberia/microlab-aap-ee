@@ -168,7 +168,7 @@ image::job_run.png[]
 
 Ahora podemos comprobar que el usuario que hemos creado tiene los permisos correctos para poder realizar su trabajo.
 
-Hacemos login con el usuario y ejecutamos uno de los Job Templates que tenemos disponibles.
+Hacemos login en la consola del Controller con el usuario que acabamos de crear y ejecutamos uno de los Job Templates que tenemos disponibles.
 
 *[OPS] Reiniciar servicio*
 *[OPS] Reiniciar servidor*

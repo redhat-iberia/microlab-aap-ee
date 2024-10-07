@@ -1,5 +1,5 @@
-name: template-tutorial
-title: Template Tutorial
+name: microlab-debugging-ee
+title: Summit Connect 2024 - Microlab Debugging EE
 version: master
 nav:
   - modules/ROOT/nav.adoc

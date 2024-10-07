@@ -1,20 +1,41 @@
-= Welcome to Template Tutorial
-:page-layout: home
-:!sectids:
+= Debugging Execution Environments 
+== Microlab Info
 
-[.text-center.strong]
-== Publish Services to Kubernetes
+En este laboratorio veremos la importancia de los Execution Enviroments para la escalabilidad y estandarización de nuestra plataforma de Automatización. 
 
-A Kubernetes tutorial to show how you can deploy a Java service to a Kubernetes cluster as it was a child game.
+Para realizar el laboratorio necesitarás conectarte a través de navegador web a la consola de Ansible Automation Platform con los siguientes datos:
+
+[#controller]
+[TIP]
+====
+Login link:https://aap24-controller01.sc24.workshops/#/login[Ansible Automation Controller]
+*user*: user02
+*pass*: R3dh4t1!
+====
+
+También haremos uso de ansible-navigator desde la consola del servidor:
+
+[#ssh]
+[TIP]
+====
+[source,bash]
+----
+ssh root@aap24-controller01.sc24.workshops
+----
+*pass*: R3dh4t1!
+====
 
 [.tiles.browse]
 == Browse modules
 
 [.tile]
-.xref:01-setup.adoc[Get Started]
-* xref:01-setup.adoc#minikube[Minikube]
+.xref:01-setup.adoc[Microlab Info]
+** xref:01-setup.adoc#controller[Controller Access]
+** xref:01-setup.adoc#ssh[SSH Access]
 
 [.tile]
-.xref:02-deploy.adoc[Deploying]
-* xref:02-deploy.adoc#package[Package the Application]
-* xref:02-deploy.adoc#deploy[Deploy the Application]
+xref:02-deploy.adoc[Microlab Guide]
+
+
+
+
