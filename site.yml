@@ -8,11 +8,11 @@ site:
 content:
   sources:
     - url: ./
-      branches: HEAD
       start_path: documentation
 asciidoc:
   attributes:
     title: Summit Connect 2024 - Microlab Debugging EE
+    release-version: master
     page-pagination: true
   extensions:
     - ./lib/tab-block.js
