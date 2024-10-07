@@ -44,7 +44,7 @@ Nos conectamos a la máquina a través de ssh.
 $ ssh root@aap24-controller01.sc24.workshops
 ----
 
-Ahora vamos a usar el comando _ansible-navigator_ 
+Ahora vamos a usar el comando *_ansible-navigator_* 
 
 [source,bash,subs="+macros,+attributes"]
 ----
@@ -73,7 +73,7 @@ $ ansible-navigator
 20│-winston
 ----
 
-Seleccionamos la opción _images_, escribiendo _:images_ en el terminal, y se nos mostrarán las imagenes que tenemos en el registry interno.
+Seleccionamos la opción *_images_*, escribiendo *_:images_* en el terminal, y se nos mostrarán las imagenes que tenemos en el registry interno.
 
 [source,bash,subs="+macros,+attributes"]
 ----
@@ -83,7 +83,7 @@ Image                                                Tag             Execution e
 2│gitlab-ee                                            latest          False                                            4 weeks ago               3.45 GB
 ----
 
-Elegimos la imagen que queramos inspeccionar pulsando el numero del index y seleccionamos la opción 2 en la siguiente pantalla
+Elegimos la imagen que queramos inspeccionar, en este caso la _ee-supported-rhel8_, pulsando el número *_0_*.  En la siguiente pantalla, seleccionamos la opción *_2_* para que nos muestre las collecciones instaladas en el Execution Environment.
 
 [source,bash,subs="+macros,+attributes"]
 ----
@@ -176,6 +176,6 @@ Hacemos login en la consola del Controller con el usuario que acabamos de crear 
 [#resumen]
 === Resumen
 
-Durante este microlab hemos querido hacer foco en la importancia de la abtracción a la hora de crear código delegando las dependencias de paquetes y módulos en la creación del Execution Environment, lo que nos proporciona una portabilidad absoluta a la hora de ejecutar nuestro código, y en una de las herramientas de desarrollo incluídas en Ansible Automation Platform como es _ansible-navigator_.
+Durante este microlab hemos querido hacer foco en la importancia de la abtracción a la hora de crear código delegando las dependencias de paquetes y módulos en la creación del Execution Environment, lo que nos proporciona una portabilidad absoluta a la hora de ejecutar nuestro código, y en una de las herramientas de desarrollo incluídas en Ansible Automation Platform como es *_ansible-navigator_*.
 
 Obviamente ésta no es la única (hay más de 20 projectos de comunidad), pero si quieres ampliar la información sobre las demás herramientas incluídas puedes pasar por nuestro stand y preguntar a uno de nuestros expertos.

@@ -3,11 +3,12 @@ runtime:
 
 site:
   title: Summit Connect 2024 - Microlab Debugging EE
-  url: https://redhat-scholars.github.io/course-template
-  start_page: microlab-aap-ee::index.adoc
+  url: https://redhat-iberia.github.io/microlab-aap-ee/
+  start_page: debugging-ee::index.adoc
 content:
   sources:
     - url: ./
+      branches: HEAD
       start_path: documentation
 asciidoc:
   attributes:
