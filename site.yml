@@ -3,15 +3,14 @@ runtime:
 
 site:
   title: Summit Connect 2024 - Microlab Debugging EE
-  url: https://redhat-iberia.github.io/microlab-aap-ee/
-  start_page: debugging-ee::index.adoc
+  url: https://github.com/redhat-iberia/microlab-aap-ee/
+  start_page: microlab-debugging-ee::index.adoc
 content:
   sources:
     - url: ./
       start_path: documentation
 asciidoc:
   attributes:
-    title: Summit Connect 2024 - Microlab Debugging EE
     release-version: master
     page-pagination: true
   extensions:
