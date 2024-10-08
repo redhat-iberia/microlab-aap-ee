@@ -9,7 +9,7 @@ Para realizar el laboratorio necesitarás conectarte a través de navegador web 
 [TIP]
 ====
 Login link:https://aap24-controller01.sc24.workshops/#/login[Ansible Automation Controller]
-*user*: user02
+*user*: user2
 *pass*: Summit24!
 ====
 
@@ -23,18 +23,3 @@ También haremos uso de ansible-navigator desde la consola del servidor:
 ssh awx@aap24-controller01.sc24.workshops
 ----
 ====
-
-[.tiles.browse]
-== Browse modules
-
-[.tile]
-.xref:01-setup.adoc[Microlab Info]
-** xref:01-setup.adoc#controller[Controller Access]
-** xref:01-setup.adoc#ssh[SSH Access]
-
-[.tile]
-xref:02-deploy.adoc[Microlab Guide]
-
-
-
-

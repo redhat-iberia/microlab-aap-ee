@@ -9,8 +9,8 @@ Para realizar el laboratorio necesitarás conectarte a través de navegador web 
 [TIP]
 ====
 Login link:https://aap24-controller01.sc24.workshops/#/login[Ansible Automation Controller]
-*user*: user02
-*pass*: R3dh4t1!
+*user*: user2
+*pass*: Summit24!
 ====
 
 También haremos uso de ansible-navigator desde la consola del servidor:
@@ -20,7 +20,6 @@ También haremos uso de ansible-navigator desde la consola del servidor:
 ====
 [source,bash]
 ----
-ssh root@aap24-controller01.sc24.workshops
+ssh awx@aap24-controller01.sc24.workshops
 ----
-*pass*: R3dh4t1!
 ====
