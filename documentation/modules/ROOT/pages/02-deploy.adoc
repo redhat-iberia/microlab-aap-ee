@@ -16,7 +16,7 @@ image::survey.png[]
 
 Una vez la ejecución del Job Template haya fallado (esa era la intención) vamos a ver cual es el error a través de la interfaz Web.
 
-En los logs podremos ver que el problema viene por la falta de una colección que no existe dentro del execution environment.
+En los logs podremos ver que el problema viene por la falta de una colección que no existe dentro del execution environment, en concreto estamos usando el módulo _ansible.controller.user_ para crear el usuario.
 
 image::error_log.png[]
 
@@ -25,7 +25,7 @@ image::error_log.png[]
 En caso de que no se vea el log refrescar la página.
 ====
 
-Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse.
+Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse por uno que contenga la coleccion necesaria (_ansible.controller_) para su correcto funcionamiento.
 
 [IMPORTANT]
 ====
@@ -39,7 +39,7 @@ En la link:https://aap24-controller01.sc24.workshops/#/execution_environments[in
 
 image::exec_envs.png[]
 
-Con esta información no vamos a poder saber cual de ellas tiene la colección que necesitamos, pero disponemos de una herramienta de exploración a través del terminal.
+Disponemos de tres EE precargados en el controller y uno de otro microLab. Con esta información no vamos a poder saber cual de ellas tiene la colección que necesitamos (_ansible.controller_), pero disponemos de una herramienta de exploración a través del terminal.
 
 Nos conectamos a la máquina a través de ssh. 
 
@@ -48,7 +48,12 @@ Nos conectamos a la máquina a través de ssh.
 $ ssh awx@aap24-controller01.sc24.workshops
 ----
 
-Ahora vamos a usar el comando *_ansible-navigator_* 
+Ahora vamos a usar el comando *_ansible-navigator_*. 
+
+[NOTE]
+====
+_ansible-navigator_ es una herramienta de línea de comandos y una interfaz de usuario basada en texto (TUI) para crear, revisar, ejecutar y solucionar problemas de contenido de Ansible, incluidos inventarios, guías, colecciones, documentación e imágenes de contenedores (execution environments).
+====
 
 [source,bash,subs="+macros,+attributes"]
 ----
@@ -81,13 +86,13 @@ Seleccionamos la opción _images_, escribiendo *_:images_* en el terminal, y se 
 
 [source,bash,subs="+macros,+attributes"]
 ----
-Image                                                Tag             Execution environment                            Created                   Size
-0│ee-supported-rhel8                                   latest          True                                             2 weeks ago               1.53 GB
-1│ee-supported-rhel8-casc                              latest          True                                             11 days ago               1.62 GB
-2│gitlab-ee                                            latest          False                                            4 weeks ago               3.45 GB
+  Image                                Tag        Execution environment             Created            Size
+0│ee-minimal-rhel8                     latest     True                              2 weeks ago        327 MB
+1│ee-supported-rhel8                   latest     True                              13 days ago        1.56 GB
+2│ee-supported-rhel8-casc              latest     True                              4 weeks ago        1.62 GB
 ----
 
-Elegimos la imagen que queramos inspeccionar, en este caso la _ee-supported-rhel8_, pulsando el número *"_0_"*.  En la siguiente pantalla, seleccionamos la opción *"_2_"* para que nos muestre las collecciones instaladas en el Execution Environment.
+Elegimos la imagen que queramos inspeccionar, en este caso la _ee-supported-rhel8_, pulsando el número *"_1_"*.  En la siguiente pantalla, seleccionamos la opción *"_2_"* para que nos muestre las collecciones instaladas en el Execution Environment.
 
 [source,bash,subs="+macros,+attributes"]
 ----
@@ -100,7 +105,7 @@ Image: ee-supported-rhel8:latest (primary)                                 Descr
 5│Everything                                                                 All image information
 ----
 
-Una vez seleccionada la imagen nos mostrará todas las colecciones instaladas en el Execution Environment
+Una vez seleccionada la imagen nos mostrará todas las colecciones instaladas en el Execution Environment, y vemos que la tiene incluída la que estamos buscando (_ansible.controller_).
 
 ----
 Image: ee-supported-rhel8:latest (primary) (Information about ansible and ansible collections)                                                                       
@@ -176,6 +181,11 @@ Hacemos login en la consola del Controller con el usuario que acabamos de crear 
 
 *[OPS] Reiniciar servicio*
 *[OPS] Reiniciar servidor*
+
+[TIP]
+====
+Los job-templates desplegados simulan el comportamiento típico de un reinicio, pero para ahorrar recursos no ejecutan nada real, por lo que no temas por ejecutarlos con las opciones que quieras.
+====
 
 [#resumen]
 === Resumen
