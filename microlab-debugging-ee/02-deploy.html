@@ -114,7 +114,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 <p>Una vez la ejecución del Job Template haya fallado (esa era la intención) vamos a ver cual es el error a través de la interfaz Web.</p>
 </div>
 <div class="paragraph">
-<p>En los logs podremos ver que el problema viene por la falta de una colección que no existe dentro del execution environment.</p>
+<p>En los logs podremos ver que el problema viene por la falta de una colección que no existe dentro del execution environment, en concreto estamos usando el módulo <em>ansible.controller.user</em> para crear el usuario.</p>
 </div>
 <div class="imageblock">
 <div class="content">
@@ -136,7 +136,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </table>
 </div>
 <div class="paragraph">
-<p>Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse.</p>
+<p>Para solucionar esto deberemos cambiar el execution environment que usa el Job Template para lanzarse por uno que contenga la coleccion necesaria (<em>ansible.controller</em>) para su correcto funcionamiento.</p>
 </div>
 <div class="admonitionblock important">
 <table>
@@ -164,7 +164,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Con esta información no vamos a poder saber cual de ellas tiene la colección que necesitamos, pero disponemos de una herramienta de exploración a través del terminal.</p>
+<p>Disponemos de tres EE precargados en el controller y uno de otro microLab. Con esta información no vamos a poder saber cual de ellas tiene la colección que necesitamos (<em>ansible.controller</em>), pero disponemos de una herramienta de exploración a través del terminal.</p>
 </div>
 <div class="paragraph">
 <p>Nos conectamos a la máquina a través de ssh.</p>
@@ -175,7 +175,21 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Ahora vamos a usar el comando <strong><em>ansible-navigator</em></strong></p>
+<p>Ahora vamos a usar el comando <strong><em>ansible-navigator</em></strong>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p><em>ansible-navigator</em> es una herramienta de línea de comandos y una interfaz de usuario basada en texto (TUI) para crear, revisar, ejecutar y solucionar problemas de contenido de Ansible, incluidos inventarios, guías, colecciones, documentación e imágenes de contenedores (execution environments).</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -209,14 +223,14 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">Image                                                Tag             Execution environment                            Created                   Size
-0│ee-supported-rhel8                                   latest          True                                             2 weeks ago               1.53 GB
-1│ee-supported-rhel8-casc                              latest          True                                             11 days ago               1.62 GB
-2│gitlab-ee                                            latest          False                                            4 weeks ago               3.45 GB</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">  Image                                Tag        Execution environment             Created            Size
+0│ee-minimal-rhel8                     latest     True                              2 weeks ago        327 MB
+1│ee-supported-rhel8                   latest     True                              13 days ago        1.56 GB
+2│ee-supported-rhel8-casc              latest     True                              4 weeks ago        1.62 GB</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Elegimos la imagen que queramos inspeccionar, en este caso la <em>ee-supported-rhel8</em>, pulsando el número <strong>"<em>0</em>"</strong>.  En la siguiente pantalla, seleccionamos la opción <strong>"<em>2</em>"</strong> para que nos muestre las collecciones instaladas en el Execution Environment.</p>
+<p>Elegimos la imagen que queramos inspeccionar, en este caso la <em>ee-supported-rhel8</em>, pulsando el número <strong>"<em>1</em>"</strong>.  En la siguiente pantalla, seleccionamos la opción <strong>"<em>2</em>"</strong> para que nos muestre las collecciones instaladas en el Execution Environment.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -230,7 +244,7 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 </div>
 </div>
 <div class="paragraph">
-<p>Una vez seleccionada la imagen nos mostrará todas las colecciones instaladas en el Execution Environment</p>
+<p>Una vez seleccionada la imagen nos mostrará todas las colecciones instaladas en el Execution Environment, y vemos que la tiene incluída la que estamos buscando (<em>ansible.controller</em>).</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -318,6 +332,20 @@ nombrado <strong>[OPS] Añadir usuario a Operaciones</strong>.</p>
 <div class="paragraph">
 <p><strong>[OPS] Reiniciar servicio</strong>
 <strong>[OPS] Reiniciar servidor</strong></p>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Los job-templates desplegados simulan el comportamiento típico de un reinicio, pero para ahorrar recursos no ejecutan nada real, por lo que no temas por ejecutarlos con las opciones que quieras.</p>
+</div>
+</td>
+</tr>
+</table>
 </div>
 </div>
 <div class="sect2">
